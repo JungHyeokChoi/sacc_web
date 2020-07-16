@@ -36,6 +36,9 @@ docker exec cli peer chaincode list --instantiated -C mychannel
 
 echo
 echo "#Create Wallet"
+if [ ! -d "node_modules" ]; then
+       npm install
+fi
 rm -rf wallet
 node enrollAdmin.js
 node registerUser.js

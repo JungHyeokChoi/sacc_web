@@ -12,9 +12,9 @@ router.route('/')
         res.render('index')
     })
 
-router.route('/create')
+router.route('/invoke')
     .get((req, res) => {
-        res.render('create')
+        res.render('invoke')
     })
     .post(async (req, res) => {
         const key = req.body.key
@@ -22,7 +22,7 @@ router.route('/create')
         
         const walletPath = path.join(process.cwd(), 'wallet')
         const wallet = new FileSystemWallet(walletPath)
-        console.log(`Wallet path : ${walletPath}`)
+        // console.log(`Wallet path : ${walletPath}`)
 
         const userExists = await wallet.exists('user1')
         if(!userExists){
@@ -37,19 +37,22 @@ router.route('/create')
         const contract = network.getContract('sacc')
         await contract.submitTransaction('set', key, value)
 
-        console.log('Transaction has been submitted')
+        // console.log('Transaction has been submitted')
         await gateway.disconnect()
 
         await res.render('index')
     })
 
-router.route('/key')
+router.route('/query')
+    .get((req, res) => {
+        res.render('query', {data : null})
+    })
     .post(async (req, res) => {
         const key = req.body.key
         
         const walletPath = path.join(process.cwd(), 'wallet')
         const wallet = new FileSystemWallet(walletPath)
-        console.log(`Wallet path : ${walletPath}`)
+        // console.log(`Wallet path : ${walletPath}`)
 
         const userExists = await wallet.exists('user1')
         if(!userExists){
@@ -62,21 +65,15 @@ router.route('/key')
 
         const network = await gateway.getNetwork('mychannel')
         const contract = network.getContract('sacc')
-        const result = await contract.evaluateTransaction('get', key)
+        const value = await contract.evaluateTransaction('get', key)
 
-        console.log(`Transaction has been evaluated, reulst is :${result.toString()}`)
+        // console.log(`Transaction has been evaluated, reulst is :${value.toString()}`)
+        result = {
+            key : key,
+            value : value.toString()
+        }
 
-        await res.render('index')
-    })
-
-router.route('/modify')
-    .get((req, res) => {
-        res.render('modify')
-    })
-
-router.route('/query')
-    .get((req, res) => {
-        res.render('query')
+        await res.render('query', {data : result})
     })
 
 module.exports = router

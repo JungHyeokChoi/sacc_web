@@ -4,9 +4,6 @@ const path = require('path')
 const apiRouter = require('./routes/Router')
 var bodyParser = require('body-parser')
 
-const HOST = '0.0.0.0'
-const PORT = 8080
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : false}))
 
@@ -17,6 +14,7 @@ app.use(express.static(__dirname + '/public'))
 app.set('views', path.resolve(__dirname + "/views"))
 app.set('view engine', 'ejs')
 
-app.listen(PORT, HOST, (req, res) => {
-    console.log(`Running on http://${HOST}:${PORT}`)
+const PORT = 8080
+app.listen(PORT, (req, res) => {
+    console.log(`Running on http://localhost:${PORT}`)
 })

@@ -1,0 +1,27 @@
+<%- include('_header.ejs') -%>
+<div class="row no-gutter">
+  <div class="col-md-8 mx-auto">
+    <div class="login d-flex align-items-center py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-lg-8 mx-auto">
+            <h3 class="login-heading mb-4">Invoke</h3>
+            <form action="/invoke" method="POST">
+              <div class="form-group">
+                <input type="text" name="key" class="form-control my-input" id="keyInput" placeholder="Input Key" autocomplete="off">
+              </div>
+              <div class="form-group">
+                <input type="text" name="value" class="form-control my-input" id="valueInput" placeholder="Input Value" autocomplete="off">
+              </div>
+              <div class= "mx-auto text-center">
+                <button type="submit" class="btn btn-outline-primary">Invoke</button>
+                <a href="/"><button type="button" class="btn btn-outline-secondary">Cancel</button></a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('_footer.ejs') -%>

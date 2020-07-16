@@ -1,0 +1,23 @@
+<%- include('_header.ejs') -%>
+<div class="container">
+    <div class="col-md-6 mx-auto text-center">
+      <div class="header-title">
+        <h1 class="wv-heading--title">User Query Form</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="myform form ">
+          <form action="/key" method="POST">
+            <div class="form-group">
+              <input type="text" name="key" class="form-control my-input" id="titleInput" placeholder="Input Key">
+            </div>
+            <div class= "mx-auto text-center">
+              <button type="submit" class="btn btn-primary">Query</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('_footer.ejs') -%>
